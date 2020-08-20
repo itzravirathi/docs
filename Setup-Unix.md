@@ -1,7 +1,12 @@
 # Dev Setup
 
-* Productivity - Window Management/Quick Launcher/Hyperswitch
+* Productivity - Window Management/Quick Launcher/Coverflow
 * Settings - Dock/Finder
+  * Application Finder
+  * DocFetcher 
+  * CerebroApp
+  * Albert 
+  * Dash to Panel
 * Web Browser - Extensions - AdBlock, Privacy Badger, OneTab, JSONViewer, Stylus, Vue Devtools, React Devtools
 * Node.js - nvm
 * Code Editor - vs code
@@ -9,7 +14,16 @@
 * Break timer and Flux
 
 
+
 # Setup commands
+
+## Window management
+### Coverflow Alt-Tab
+
+## albert
+sudo apt install albert
+### set CMD+space to launch albert
+
 ## Terminal
 sudo apt install terminator
 ### update  settings -> colors, keep directory open new shell, keyboard shortcuts
@@ -25,9 +39,7 @@ sudo apt intall bash # latest version of bash if not already installed
 }
 ### update bash_profile
 
-## albert
-sudo apt install albert
-## set CMD+space to launch alfred
+
 
 ## firefox
 sudo apt install firefox
