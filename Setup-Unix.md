@@ -17,15 +17,16 @@
 
 # Setup commands
 
-## Window management
-### Coverflow Alt-Tab
+## Coverflow Alt-Tab
+## Dash to Panel
 
-## albert
+## Albert
 sudo apt install albert
-### set CMD+space to launch albert
+set CMD+space to launch albert
 
 ## Terminal
 sudo apt install terminator
+
 ### update  settings -> colors, keep directory open new shell, keyboard shortcuts
 ## bash
 sudo apt intall bash # latest version of bash if not already installed
@@ -43,3 +44,8 @@ sudo apt intall bash # latest version of bash if not already installed
 
 ## firefox
 sudo apt install firefox
+
+## Pules Audio
+sudo apt install pulseaudio
+sudo apt install pavucontrol
+
