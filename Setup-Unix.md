@@ -1,12 +1,14 @@
 # Dev Setup
 
-* Productivity - Window Management/Quick Launcher/Coverflow
+* Productivity - Window Management/Quick Launcher
+	## Coverflow Alt-Tab
+	## Dash to Panel
+
 * Settings - Dock/Finder
   * Application Finder
   * DocFetcher 
   * CerebroApp
   * Albert 
-  * Dash to Panel
 * Web Browser - Extensions - AdBlock, Privacy Badger, OneTab, JSONViewer, Stylus, Vue Devtools, React Devtools
 * Node.js - nvm
 * Code Editor - vs code
@@ -17,38 +19,139 @@
 
 # Setup commands
 
-## Coverflow Alt-Tab
-## Dash to Panel
-
-## Albert
-sudo apt install albert
-set CMD+space to launch albert
-
-## Terminal
-sudo apt install terminator
-
-### update  settings -> colors, keep directory open new shell, keyboard shortcuts
-## bash
-sudo apt intall bash # latest version of bash if not already installed
-### set bash as default shell
-1. brew install fortune
-2. brew install cowsay 
-3. brew install git
-4. brew install vcprompt
-    1. git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-### update bash_profile
-
-
-
-## firefox
-sudo apt install firefox
+#curl
+sudo apt install curl
 
 ## Pules Audio
 sudo apt install pulseaudio
 sudo apt install pavucontrol
 
-## Mail Client
-sudo apt-get install evolution evolution-ews
+#MS Fonts
+sudo apt update && sudo apt install ttf-mscorefonts-installer
 
+#Gnome shell connector
+sudo apt-get install chrome-gnome-shell
+
+## gnome-tweaks
+sudo apt install gnome-tweaks
+
+## OCS-URL 
+from .deb
+
+##Vim
+sudo apt install vim
+
+#Mail
+sudo apt remove thunderbird
+sudo apt autoremove
+sudo snap install thunderbird
+## imap.mail.yahoo.com - 993
+## smtp.mail.yahoo.com - 465
+
+#Drop Box  – via .deb from internet.
+
+# KeePassX 2 – Backup 
+sudo add-apt-repository ppa:eugenesan/ppa
+sudo apt-get update
+sudo apt-get install keepassx
+
+#imwheel
+sudo apt-get install imwheel
+
+# http://www.webupd8.org/2015/12/how-to-change-mouse-scroll-wheel-speed.html
+# start application with, add to startup
+# imwheel --kill --buttons "4 5"
+
+#Browser
+sudo apt remove chromium-browser
+sudo apt remove firefox
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt install chromium-browser
+sudo apt install firefox
+
+sudo snap install opera
+# from Opera Store
+#wget -qO- https://deb.opera.com/archive.key | sudo apt-key add -
+#sudo add-apt-repository "deb [arch=i386,amd64] https://deb.opera.com/opera-stable/ stable non-free"
+#sudo apt install opera-stable
+
+#Canon Printer
+#1. Connect Printer via USB Cable
+#2. Install and run "IJ Network Device Setup Utility" for Canon
+#3. Password for Printer is Serial Number - KKMR21884
+#4. Setup Wifi Setting.
+#5. Add Network Printer to Windows or Unix
+	#A. Windows
+	#B. Unix - run cnijfilter2-5.40-1-deb to add printer
+	#C. run scangearmp2-3.40-1-deb for Scanner	
+
+
+
+## Albert
+echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list
+curl -fsSL https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home:manuelschneid3r.gpg > /dev/null
+sudo apt update
+sudo apt install albert
+set CMD+space to launch albert
+
+
+
+#Setup for development
+
+#Setup Git
+sudo apt update
+sudo apt install git
+sudo apt install git-all
+git config --global user.name "Ravi Prakash Rathi"
+git config --global user.email "raviprakash.rathi@sunrise.net"
+
+
+## setup public key
+
+#Java
+sudo apt install openjdk-8-jdk-headless
+sudo update-alternatives --config java
+
+
+#Node and NPP Install Node.js Version – 6.x on Ubuntu 16.04
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
+
+#intellij
+sudo snap install intellij-idea-ultimate --classic
+
+#Terminal
+#open Gnome terminal /usr/bin/gnome-terminal
+#Terminator
+sudo apt install fortune-mod
+sudo apt install cowsay
+sudo apt-get install terminator
+#Copy .bashrc from github
+
+
+#Setup for Office
+
+#Sunrise VPN Cisco anyconnect
+OS VPN plugin for cisco open connect
+sudo apt-get install network-manager-openconnect-gnome
+# https://vpn01.sunrise.net/VPN_sunrise
+
+
+##VMWare
+chmod a+x VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
+sudo ./VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle 
+###https://iag-vdi.sunrise.net
+###https://vdi.swi.srse.net
+
+
+##evolution
+sudo apt-get remove evolution
+sudo apt-get update
+sudo apt-get install evolution
+sudo apt-get install evolution-ews
+
+##MSteams
+sudo snap install teams-for-linux
+##Change the permision from software center

@@ -116,15 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export ORACLE_HOME=/opt/oracle/product/18c/dbhomeXE
-export ORACLE_SID=XE
-export ORACLE_BASE=/opt/oracle
-export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
-export PATH=$ORACLE_HOME/bin:$PATH
-
-
 HOST_NAME=rathi
-
 txtred='\e[0;31m' # Red
 txtgrn='\e[0;32m' # Green
 bldgrn='\e[1;32m' # Bold Green
