@@ -49,3 +49,6 @@ sudo apt install firefox
 sudo apt install pulseaudio
 sudo apt install pavucontrol
 
+## Mail Client
+sudo apt-get install evolution evolution-ews
+

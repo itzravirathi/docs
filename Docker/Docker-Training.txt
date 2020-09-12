@@ -13,6 +13,7 @@ download and run a image/containter, then run a command exmple bash
 sudo docker images
 
 
+
 ============   CONTAINER ===================
 sudo docker ps -a
 
@@ -22,6 +23,7 @@ sudo docker ps -a
 
 start a container
 	sudo docker start 1154e70a3bdd
+	portainer/portaine -> admin/portainer
 stop a container
 	sudo docker stop 1154e70a3bdd
 restart a container
