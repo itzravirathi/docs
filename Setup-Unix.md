@@ -9,7 +9,7 @@
   * DocFetcher 
   * CerebroApp
   * Albert 
-* Web Browser - Extensions - AdBlock, Privacy Badger, OneTab, JSONViewer, Stylus, Vue Devtools, React Devtools
+* Web Browser - Extensions - AdBlock, Privacy Badger, OneTab, JSONViewer, Stylus, Vue Devtools, React Devtools, Caret clock
 * Node.js - nvm
 * Code Editor - vs code
 * Code Editor Extensions
@@ -40,6 +40,10 @@ from .deb
 
 ##Vim
 sudo apt install vim
+
+#Bluetooth controller
+sudo apt-get install blueman
+#https://www.maketecheasier.com/setup-bluetooth-in-linux/
 
 #Mail
 sudo apt remove thunderbird
@@ -109,6 +113,18 @@ git config --global user.email "raviprakash.rathi@sunrise.net"
 
 ## setup public key
 
+ssh-keygen -t rsa -b 4096 -C "itzravirathi@yahoo.co.in"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+ssh -T git@github.com
+ssh -T git@bitbucket.org
+
+#change from http to ssh
+git remote -v
+git remote set-url origin git@bitbucket.org:sunrisedigitalbusiness/sunrise-frontend.git
+
+
+
 #Java
 sudo apt install openjdk-8-jdk-headless
 sudo update-alternatives --config java
@@ -129,6 +145,12 @@ sudo apt install fortune-mod
 sudo apt install cowsay
 sudo apt-get install terminator
 #Copy .bashrc from github
+
+#Postman
+sudo snap install postman
+
+#GitKraken
+sudo snap install gitkraken --classic
 
 
 #Setup for Office

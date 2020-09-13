@@ -1,0 +1,45 @@
+ 
+Since the browser can’t understand React components as they come there is the need for some kind of transformation.
+
+Webpack doesn’t know how to make the transformation but it has this concept of loaders: think of them as of transformers.
+
+A Webpack loader takes something as the input and produces something else as the output.
+
+babel-loader is the Webpack loader responsible for taking in the ES6 code and making it understandable by the browser of choice.
+
+Obsviusly babel-loadermakes use of Babel. And Babel must be configured to use a bunch of presets:
+
+    babel preset env for compiling Javascript ES6 code down to ES5 (please note that babel-preset-es2015 is now deprecated)
+    babel preset react for compiling JSX and other stuff down to Javascript
+
+Let’s pull in the dependencies with:
+
+    npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+
+Don’t forget to configure Babel! Create a new file named .babelrcinside the project folder:
+
+    {
+      "presets": ["@babel/preset-env", "@babel/preset-react"]
+    }
+
+At this point we’re ready to define a minimal webpack configuration.
+
+Create a file named webpack.config.jsand fill it like the following:
+
+    module.exports = {
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader"
+            }
+          }
+        ]
+      }
+    };
+
+The configuration is quite simple.
+
+For every file with a .jsextension Webpack pipes the code through babel-loader for transforming ES6 down to ES5.
