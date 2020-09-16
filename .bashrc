@@ -123,7 +123,7 @@ bldgrn='\e[1;32m' # Bold Green
 bldpur='\e[1;35m' # Bold Purple
 txtrst='\e[0m'    # Text Reset
 
-emojis=("👾" "🌐" "🎲" "🌍" "🐉" "🌵" "🍄" "🐢" "🎀" "⌨️" "💋" "👀" "🙌" "😎" "🌿" "🦁" "🚀" "🚁")
+emojis=("👾" "🌐" "🎲" "🌍" "🐉" "🌵" "🍄" "🐢" "🎀" "💋" "👀" "🙌" "😎" "🌿" "🦁" "🚀" "🚁")
 
 EMOJI=${emojis[$RANDOM % ${#emojis[@]} ]}
 
@@ -146,3 +146,5 @@ fortune | cowsay -f tux
 
 alias sandbox='cd /media/rathi/Etc/office-office/sandbox/'
 alias chrome-cors='google-chrome --disable-web-security --user-data-dir=/home/rathi/non-default-chrome -ignore-certificate-errors'
+alias etc='cd /media/rathi/Etc/'
+alias docs='cd /media/rathi/Docs/'
