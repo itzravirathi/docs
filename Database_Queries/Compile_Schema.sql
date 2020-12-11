@@ -1,0 +1,1 @@
+EXEC  DBMS_UTILITY.compile_schema ( USER, compile_all => FALSE, reuse_settings => TRUE);

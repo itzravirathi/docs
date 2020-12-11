@@ -28,6 +28,8 @@ sudo apt install pavucontrol
 
 #MS Fonts
 sudo apt update && sudo apt install ttf-mscorefonts-installer
+## SF Pro
+sudo copy *.* /usr/local/share/fonts/sample/
 
 #Gnome shell connector
 sudo apt-get install chrome-gnome-shell
@@ -46,6 +48,11 @@ sudo apt-get install blueman
 #https://www.maketecheasier.com/setup-bluetooth-in-linux/
 
 #audio source selection
+
+#Installing Timeshift
+# add-apt-repository ppa:teejee2008/ppa
+# apt-get update
+# sudo apt install timeshift
 
 #Mail
 sudo apt remove thunderbird
@@ -98,6 +105,18 @@ sudo snap install opera
 	#C. run scangearmp2-3.40-1-deb for Scanner	
 
 
+# Manjaro printer installation
+Goto URL https://aur.archlinux.org/packages/cnijfilter2/ and download PKGFILE
+install sudo pacman -S base-devel for default=all
+makepkg in PKGFILE dir
+install cnijfilter2-6.00-1-x86_64.pkg.tar.zst via software manager
+
+tocanonij
+cnijlgmon3
+	network cnijbe2://Canon/?port=net&serial=00-BB-C1-DC-13-B1 "Canon E470 series" "Canon-E470-series_00-BB-C1-DC-13-B1"
+	localhost:631
+	system-config-printer 
+tocnpwg
 
 ## Albert
 echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list
@@ -106,7 +125,21 @@ sudo apt update
 sudo apt install albert
 set CMD+space to launch albert
 
+##Free office
+Download from  https://www.softmaker.net/down/softmaker-freeoffice-2018_978-01_amd64.deb
+dpkg -i softmaker-freeoffice-2018_978-01_amd64.deb
+apt install -f
 
+#XFCE Application finder
+	xfce4-appfinder
+
+#Wishker Menu for XFCE
+	That is easy. Go to Settings -> Keyboard -> Application Shortcuts. For the command xfce4-popup-whiskermenu, change it to the Win key.
+	That is easy. Go to Settings -> Keyboard -> Application Shortcuts. For the command xfce4-appfinder, change it to the Win key.
+
+
+#Screenshot utility
+sudo apt install flameshot
 
 #Setup for development
 
@@ -159,6 +192,7 @@ gedit ~/.config/terminator/config
       parent = ""
       profile = None
       size = 1000, 900
+sudo apt-get install ranger
 
 #Postman
 sudo snap install postman
@@ -200,9 +234,12 @@ Add Routes for 192.168.0.0,10.0.0.0,212.35.60.0
 
 ##VMWare
 chmod a+x VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
-sudo ./VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle 
+sudo ./VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
 ### https://iag-vdi.sunrise.net
 ### https://vdi.swi.srse.net
+
+sudo env VMWARE_KEEP_CONFIG=yes \
+./VMware-Horizon-Client-x.x.x-yyyyyyy.arch.bundle -u vmware-horizon-client
 
 
 ##evolution
@@ -210,7 +247,31 @@ sudo apt-get remove evolution
 sudo apt-get update
 sudo apt-get install evolution
 sudo apt-get install evolution-ews
+https://mail.sunrise.net/EWS/Exchange.asmx
+
+##Mail convertor
+sudo apt-get install libemail-outlook-message-perl libemail-sender-perl
+msgconvert *.msg
 
 ##MSteams
 sudo snap install teams-for-linux
 ##Change the permision from software center
+sudo dpkg -i teams_1.3.00.25560_amd64.deb
+
+## Setup Samba server
+sudo apt update
+sudo apt install samba
+mkdir /home/<username>/sambashare/
+sudo nano /etc/samba/smb.conf
+	At the bottom of the file, add the following lines:
+		[sambashare]
+		    comment = Samba on Ubuntu
+		    path = /home/username/sambashare
+		    read only = no
+		    browsable = yes
+sudo service smbd restart
+sudo ufw allow samba
+sudo smbpasswd -a <username>
+smb://10.80.0.39/sambashare
+\\10.80.0.20\sambashare
+

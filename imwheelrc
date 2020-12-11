@@ -1,4 +1,5 @@
-# Should use imwheel --kill --buttons "4 5" to restart imwheel,
+# Should use ubuntu imwheel --kill --buttons "4 5" to restart imwheel,
+# Should use Arch imwheel --kill -b 45 to restart imwheel
 # if the mouse has back/forward buttons, otherwhise imwheel --kill is enough.
 # imwheel must be set to autostart in your DE tools.
 #Edit ~/.imwheelrc to include, where '3' is a multiplier
