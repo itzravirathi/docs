@@ -1,0 +1,70 @@
+Core Java
+
+    OOPs Concepts
+	Java Keywords - Static , Final , volatile, synchronized , transient, this super etc.
+    Abstract Classes and Interfaces
+    Constructors
+    Access Specifiers
+    Collections - List , Map , Set
+    Exceptions - Checked , Unchecked
+    Generics
+	JVM and Memory Management
+    Multithreading and Synchronization
+    Design Patterns
+	
+	File IO and Serialization
+http://howtodoinjava.com/java-interview-questions/
+http://www.indiabix.com/online-test/java-programming-test/
+
+Experience on 
+Core Java, 
+JSP, 
+Servlets, 
+EJB, 
+SPRING, Hibernate, 
+Struts, JAXB-JAXP/XML, 
+SWING and other JAVA technologies/Frameworks, Applets Multithreading, JSF, Messaging middleware. 
+UI frameworks JQuery, Bootstrap, Spring MVC etc.
+
+http://reiboit.wordpress.com/2011/12/20/my-first-ejb-project-with-glassfish-eclipse/
+http://www.developersbook.com/corejava/interview-questions/corejava-interview-questions-faqs.php
+
+======================================================
+Spring
+======================================================
+JPA/Hibernate
+======================================================
+Transaction
+======================================================
+Servlet
+======================================================
+servlet lifecycle
+======================================================
+Maven and Sonar
+======================================================
+Build Tools
+MVN modules
+archtype maven
+
+Maven for webModule
+MVN build
+
+static code analysis tools(Sonar, Jenkins)
+findbugs,chekstyle list, PMD
+======================================================
+Others
+======================================================
+VAP
+Visa Access Point
+
+MasterCard interface processor (MIP)
+
+MasterCard Customer Implementation Services (CIS)
+MasterCard Debit Switch (“MDS”)
+IMPS (Immediate Payment Service)
+
+Short Messaging Service ('SMS')
+BASE1
+BASE2
+
+======================================================

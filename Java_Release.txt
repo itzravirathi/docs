@@ -1,0 +1,99 @@
+RTTI(Run Time Type Information/Reflection)
+
+This takes two forms: "traditional" RTTI, which assumes that you have all the types available at compile time, and the reflection mechanism, which allows you to discover and use class information solely at run time.
+If you don’t know the precise type of an object, RTTI will tell you. However, there’s a limitation: The type must be known at compile time in order for you to detect it using RTTI and to do something useful with the information. Put another way, the compiler must know about all the classes you’re working with.
+ 
+
+static final initialized
+
+If a static final value is a "compile-time constant," such as Initable.staticFinal, that value can be read without causing the Initable class to be initialized. Making a field static and final, however, does not guarantee this behavior: accessing Initable.staticFinal2 forces class initialization because it cannot be a compile-time constant.
+If a static field is not final, accessing it always requires linking (to allocate storage for the field) and initialization (to initialize that storage) before it can be read, as you can see in the access to Initable2.staticNonFinal.
+
+Feature 1.6
+Collection
+    Deque - a double ended queue, supporting element insertion and removal at both ends. Extends the Queue interface.
+    BlockingDeque - a Deque with operations that wait for the deque to become non-empty when retrieving an element, and wait for space to become available in the deque when storing an element. Extends both the Deque and BlockingQueue interfaces. (This interface is part of java.util.concurrent.)
+    NavigableSet - a SortedSet extended with navigation methods reporting closest matches for given search targets. A NavigableSet may be accessed and traversed in either ascending or descending order. This interface is intended to supersede the SortedSet interface.
+    NavigableMap - a SortedMap extended with navigation methods returning the closest matches for given search targets. A NavigableMap may be accessed and traversed in either ascending or descending key order. This interface is intended to supersede the SortedMap interface.
+    ConcurrentNavigableMap - a ConcurrentMap that is also a NavigableMap. (This interface is part of java.util.concurrent.)
+
+Internationalization
+                Unicode Normalizer API
+                Japanese Imperial Calendar Support
+                New Encoding support
+I/O
+      Methods to retrieve disk usage information:
+             getTotalSpace(), getFreeSpace(), getUsableSpace()
+      Methods to set or query file permissions:
+              setWritable,    setReadable,     setExecutable,     canExecute()
+
+Jar and Zip Enhancements
+                For example, these can be useful if a client wants to send compressed data over a network
+    java.util.zip.DeflaterInputStream: Data read from this stream is compressed.
+    java.util.zip.InflaterOutputStream: Data written to this stream is decompressed.
+
+On Windows, some limitations have been removed:
+     File names longer than 256 characters are now supported.
+     The limitation of just over 2,000 simultaneously open zip files has been removed.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Features 1.7
+
+                Concurrency Utilities Enhancements in Java SE 7
+                                The fork/join framework, which is based on the ForkJoinPool class.
+                                is an implementation of the Executor interface. It is designed to efficiently run a large number of tasks using a pool of worker threads
+
+                                All you need to do is call ThreadLocalRandom.current(), then call one of its methods to retrieve a random number. Here is one example:
+                                int r = ThreadLocalRandom.current() .nextInt(4, 77);
+
+                Java API for XML Processing (JAXP) 1.5
+
+                Class Loader Synchronization in the Java SE 7 Release
+
+                In Java SE 7, the integral types (byte, short, int, and long) can also be expressed using the binary number system. To specify a binary literal, add the prefix 0b or 0B to the number. The following examples show binary literals:
+                                // An 8-bit 'byte' value: byte aByte = (byte)0b00100001;
+                you can use a String object in the expression of a switch statement:
+Features 1.7
+
+                The try-with-resources statement is a try statement that declares one or more resources. A resource is as an object that must be closed after the program is finished with it. The try-with-resources statement ensures that each resource is closed at the end of the statement. Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.
+
+                                                                                static String readFirstLineFromFile(String path) throws IOException {
+
+                                                  try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+                                                                return br.readLine();
+
+                                                  }
+
+                                                }
+                Handling More Than One Type of Exception
+                catch (IOException|SQLException ex) {
+
+                long creditCardNumber = 1234_5678_9012_3456L;
+                any number of underscore characters (_)
+
+                Type Inference for Generic Instance Creation
+                                Map<String, List<String>> myMap = new HashMap<String, List<String>>();
+                                In Java SE 7, you can substitute the parameterized type of the constructor with an empty set of type parameters (<>):
+                                Map<String, List<String>> myMap = new HashMap<>();
+
+                Garbage-First Collector
+                                It meets garbage collection (GC) pause time goals with high probability, while achieving high throughput.
+								
+Feature 1.8
+	Removal of PermGen.								
+	
+	Classes and interfaces have been added to the java.util.concurrent package
+
+	JDBC
+	The JDBC-ODBC Bridge has been removed.
+    JDBC 4.2 introduces new features.
+
+java.lang and java.util Packages
+
+    Parallel Array Sorting
+    Standard Encoding and Decoding Base64
+    Unsigned Arithmetic Support
+	
+Date-Time Package - a new set of packages that provide a comprehensive date-time model.	
+								

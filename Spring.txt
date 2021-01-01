@@ -1,0 +1,188 @@
+http://www.journaldev.com/2696/spring-interview-questions-and-answers
+================================================
+Spring
+================================================
+inversion of control
+   What is IOC?
+
+- IOC stands for Inversion of Control pattern.
+- It is also called as dependency injection.
+- This concept says that you do not create your objects but describe how they should be created.
+- Similarly, you do not directly connect your components and services together in code but describe which services are needed by which components in a configuration file.
+- A container then hooks them all up.
+
+What are the different types of IoC (dependency injection) ?
+There are three types of dependency injection:
+
+a.) Constructor Injection : Here dependencies are provided as constructor parameters.
+b.) Setter Injection : Dependencies are assigned through JavaBeans properties.
+c.) Interface Injection : Injection is performed through an interface.
+
+17 What are Advice, Aspect, Join-point and point cut in spring?
+http://www.journaldev.com/2583/spring-aop-example-tutorial-aspect-advice-pointcut-joinpoint-annotations-xml-configuration
+Advice: An advice is an action taken by the aspect at particular join-point is called Advice.
+    Before Advice: These advices runs before the execution of join point methods. 
+	We can use @Before annotation to mark an advice type as Before advice.
+    
+	After (finally) Advice: An advice that gets executed after the join point method finishes executing, 
+	whether normally or by throwing an exception. We can create after advice using @After annotation.
+    
+	After Returning Advice: Sometimes we want advice methods to execute only if the join point method executes normally. 
+	We can use @AfterReturning annotation to mark a method as after returning advice.
+    
+	After Throwing Advice: This advice gets executed only when join point method throws exception, 
+	we can use it to rollback the transaction declaratively. We use @AfterThrowing annotation for this type of advice.
+    
+	Around Advice: This is the most important and powerful advice. 
+	This advice surrounds the join point method and we can also choose whether to execute the join point method or not. 
+	We can write advice code that gets executed before and after the execution of the join point method. It is the responsibility of around advice to invoke the join point method and return values if the method is returning something. We use @Around annotation to create around advice methods.
+Aspect: An aspect is a subprogram which is associated with specific property of a program (Example separating logging code from the main program).
+		An aspect is functionality or feature that cross cuts over object. AOP increase modularity of a program.
+Join-Point: A join point is a point used in spring AOP framework to represent a method execution. It always point during execution of program, method or exception. A join point is basically an opportunity within the code to apply aspect.
+Point Cut: In AOP a point cut is a set of many join points where an advice can execute. A chunk of code (known as Advice) associated with join point get executed.
+
+3. Autowiring type in Spring
+                Ans.
+                1. No(Default)
+                2. ByName
+                3. ByType
+                4. ByConstructor
+                5. AuthWire(try for ByConstructor first then byType)
+
+10. Component in spring
+                Core Container:
+                                The Core module provides the fundamental parts of the framework, including the IoC and Dependency Injection features.
+                                The Bean module provides BeanFactory which is a sophisticated implementation of the factory pattern.
+                                The Context module builds on the solid base provided by the Core and Beans modules and it is a medium to access any objects defined and configured. The ApplicationContext interface is the focal point of the Context module.
+                                The Expression Language module provides a powerful expression language for querying and manipulating an object graph at runtime.
+                Data Access/Integration:
+                                The JDBC module provides a JDBC-abstraction layer that removes the need to do tedious JDBC related coding.
+                                The ORM module provides integration layers for popular object-relational mapping APIs, including JPA, JDO, Hibernate, and iBatis.
+                                The OXM module provides an abstraction layer that supports Object/XML mapping implementations for JAXB, Castor, XMLBeans, JiBX and XStream.
+                                The Java Messaging Service JMS module contains features for producing and consuming messages.
+                                The Transaction module supports programmatic and declarative transaction management for classes that implement special interfaces and for all your POJOs.
+                Web:
+                                The Web module provides basic web-oriented integration features such as multipart file-upload functionality and the initialization of the IoC container using servlet listeners and a web-oriented application context.
+                                The Web-Servlet module contains Spring's model-view-controller (MVC) implementation for web applications.
+                                The Web-Struts module contains the support classes for integrating a classic Struts web tier within a Spring application.
+                                The Web-Portlet module provides the MVC implementation to be used in a portlet environment and mirrors the functionality of Web-Servlet module.
+                Miscellaneous:
+                                The AOP module provides aspect-oriented programming implementation allowing you to define method-interceptors and pointcuts to cleanly decouple code that implements functionality that should be separated.
+                                The Aspects module provides integration with AspectJ which is again a powerful and mature aspect oriented programming (AOP) framework.
+                                The Instrumentation module provides class instrumentation support and class loader implementations to be used in certain application servers.
+                                The Test module supports the testing of Spring components with JUnit or TestNG frameworks.
+
+11. Scope of beans.
+                singleton       This scopes the bean definition to a single instance per Spring IoC container (default).
+                prototype       This scopes a single bean definition to have any number of object instances.
+                request         This scopes a bean definition to an HTTP request. Only valid in the context of a web-aware Spring ApplicationContext.
+                session 		This scopes a bean definition to an HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+                global-session  This scopes a bean definition to a global HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+
+5. Annotation for Spring and hibernates.
+http://www.techferry.com/articles/spring-annotations.html
+                @Service            import org.springframework.stereotype.Service;
+                @Repository      	import org.springframework.stereotype.Repository;
+                @Component   		import org.springframework.stereotype.Component;
+                @Autowired      	import org.springframework.beans.factory.annotation.Autowired;
+                @Transactional 		import org.springframework.transaction.annotation.Transactional;
+                @Scope              import org.springframework.context.annotation.Scope;
+                Spring MVC Annotations
+
+                @Controller       	import org.springframework.stereotype.Controller;
+                @RequestMapping     import org.springframework.web.bind.annotation.RequestMapping;
+                @PathVariable  		import org.springframework.web.bind.annotation.PathVariable;
+                @RequestParam       import org.springframework.web.bind.annotation.RequestParam;
+                @ModelAttribute     import org.springframework.web.bind.annotation.ModelAttribute;
+                @SessionAttributes  import org.springframework.web.bind.annotation.SessionAttributes;
+
+
+Define a bean
+	XML Configuration: This is the most popular configuration and we can use bean element in context file to configure a Spring Bean. For example:
+	<bean name="myBean" class="com.journaldev.spring.beans.MyBean"></bean>
+
+	Java Based Configuration: If you are using only annotations, you can configure a Spring bean using @Bean annotation. This annotation is used with @Configuration classes to configure a spring bean. Sample configuration is:
+		@Configuration
+		@ComponentScan(value="com.journaldev.spring.main")
+		public class MyConfiguration {
+		 
+			@Bean
+			public MyService getService(){
+				return new MyService();
+			}
+		}
+
+	Annotation Based Configuration: We can also use @Component, @Service, @Repository and @Controller annotations with classes to configure them to be as spring bean. For these, we would need to provide base package location to scan for these classes. For example:
+	<context:component-scan base-package="com.journaldev.spring" />
+
+Initialize a bean
+http://www.journaldev.com/2637/spring-bean-life-cycle-methods-initializingbean-disposablebean-postconstruct-predestroy-aware-interfaces
+	By implementing InitializingBean and DisposableBean interfaces – 
+	Both these interfaces declare a single method where we can initialize/close resources in the bean. 
+		For post-initialization, we can implement InitializingBean interface and provide implementation of afterPropertiesSet() method. 
+		For pre-destroy, we can implement DisposableBean interface and provide implementation of destroy() method. 
+		These methods are the callback methods and similar to servlet listener implementations.
+	This approach is simple to use but it’s not recommended because it will create tight coupling with the Spring framework in our bean implementations.
+
+	Providing init-method and destroy-method attribute values for the bean in the spring bean configuration file. 
+	This is the recommended approach because of no direct dependency to spring framework and we can create our own methods.
+
+	Spring framework also support @PostConstruct and @PreDestroy annotations for defining post-init and pre-destroy methods. 
+	These annotations are part of javax.annotation package. 
+	However for these annotations to work, we need to configure our spring application to look for annotations. 
+	We can do this either by defining bean of type org.springframework.context.annotation.CommonAnnotationBeanPostProcessor or by context:annotation-config element in spring bean configuration file.
+
+	
+Spring Aware interfaces
+    ApplicationContextAware – to inject ApplicationContext object, example usage is to get the array of bean definition names.
+    BeanFactoryAware – to inject BeanFactory object, example usage is to check scope of a bean.
+    BeanNameAware – to know the bean name defined in the configuration file.
+    ResourceLoaderAware – to inject ResourceLoader object, example usage is to get the input stream for a file in the classpath.
+    ServletContextAware – to inject ServletContext object in MVC application, example usage is to read context parameters and attributes.
+    ServletConfigAware – to inject ServletConfig object in MVC application, example usage is to get servlet config parameters.
+
+
+Bean Lifecycle
+1-   IoC container will look for the configuration metadata of given Bean.
+2-   Once find, container will create the instance of Bean(Using reflection API).
+3-   After instance creation dependency will be injected(DI).
+
+If Bean Class  implements any of the below interface then corresponding method will be invoked in below order(Point 4 – 11).
+4-   setBeanName method of BeanNameAware class. It sets the name of the bean in the bean factory that created this bean.
+5-   setBeanClassLoader method of BeanClassLoaderAware class. Callback that supplies the bean to a bean instance.
+6-   setBeanFactory  method of BeanFactoryAware class. Callback that supplies the owning factory to a bean instance.
+7-   setResourceLoader  method of ResourceLoaderAware class. It set the ResourceLoader that this object runs in.
+8-   setApplicationEventPublisher  method of ApplicationEventPublisherAware class. Set the ApplicationEventPublisher that this object runs in.
+9-   setMessageSource method of MessageSourceAware class. Set the MessageSource that this object runs in.
+10-   setApplicationContext method of ApplicationContextAware class. Set the ApplicationContext that this object runs in.
+11-   setServletContext method of ServletContextAware. Set the ServletContext that this object runs in.
+
+12-   postProcessBeforeInitialization method of BeanPostProcessor. Apply this BeanPostProcessor to the given new bean instance before any bean initialization callbacks.
+13-   afterPropertiesSet method of InitializingBean. Invoked by a BeanFactory after it has set all bean properties supplied.
+	  In case Bean class has custom init method defined(via init-method attribute)
+		Custom init method will be invoked.
+15-   postProcessAfterInitialization methods of BeanPostProcessors. Apply this BeanPostProcessor to the given new bean instance after any bean initialization callbacks
+
+
+What is Spring MVC Interceptor and how to use it?
+http://www.journaldev.com/2676/spring-mvc-interceptors-example-handlerinterceptor-and-handlerinterceptoradapter
+	Spring MVC Interceptors are like Servlet Filters and allow us to intercept client request and process it. 
+	We can intercept client request at three places – preHandle, postHandle and afterCompletion.
+	We can create spring interceptor by implementing HandlerInterceptor interface or by extending abstract class HandlerInterceptorAdapter.
+	
+
+Name some of the design patterns used in Spring Framework?
+
+Spring Framework is using a lot of design patterns, some of the common ones are:
+
+    Singleton Pattern: Creating beans with default scope.
+    Factory Pattern: Bean Factory classes
+    Prototype Pattern: Bean scopes
+    Adapter Pattern: Spring Web and Spring MVC
+    Proxy Pattern: Spring Aspect Oriented Programming support
+    Template Method Pattern: JdbcTemplate, HibernateTemplate etc
+    Front Controller: Spring MVC DispatcherServlet
+    Data Access Object: Spring DAO support
+    Dependency Injection and Aspect Oriented Programming
+
+	

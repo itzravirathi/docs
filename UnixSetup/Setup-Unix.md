@@ -9,7 +9,6 @@
   * DocFetcher 
   * CerebroApp
   * Albert 
-* Web Browser - Extensions - AdBlock, Privacy Badger, OneTab, JSONViewer, Stylus, Vue Devtools, React Devtools, Caret clock
 * Node.js - nvm
 * Code Editor - vs code
 * Code Editor Extensions
@@ -17,7 +16,7 @@
 
 
 
-# Setup commands
+# Setup commands	
 
 #curl
 sudo apt install curl
@@ -26,11 +25,26 @@ sudo apt install curl
 sudo apt install pulseaudio
 sudo apt install pavucontrol
 
-#MS Fonts
-sudo apt update && sudo apt install ttf-mscorefonts-installer
-## SF Pro
-sudo copy *.* /usr/local/share/fonts/sample/
+#audio source selection
+Install extension for Gnome or XFCE from Store
+	https://extensions.gnome.org/extension/1028/gnome-shell-audio-output-switcher/
+	https://extensions.gnome.org/extension/1092/audio-switcher/
+	Best -> https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 
+
+#MS Fonts
+Ubuntu
+	sudo apt update && sudo apt install ttf-mscorefonts-installer
+Arch
+	via AUR lib -> ttf-ms-fonts
+## SF Pro
+Ubuntu
+	sudo copy *.* /usr/local/share/fonts/sample/
+Arch
+	sudo copy *.* 	/usr/share/fonts -- For all Users
+	sudo copy *.* 	~/.local/share/fonts -- For Single User
+	fc-cache
+	
 #Gnome shell connector
 sudo apt-get install chrome-gnome-shell
 
@@ -42,17 +56,18 @@ from .deb
 
 ##Vim
 sudo apt install vim
+pamac install vim
 
 #Bluetooth controller
 sudo apt-get install blueman
 #https://www.maketecheasier.com/setup-bluetooth-in-linux/
 
-#audio source selection
+
 
 #Installing Timeshift
-# add-apt-repository ppa:teejee2008/ppa
-# apt-get update
-# sudo apt install timeshift
+add-apt-repository ppa:teejee2008/ppa
+apt-get update
+sudo apt install timeshift
 
 #Mail
 sudo apt remove thunderbird
@@ -61,7 +76,19 @@ sudo snap install thunderbird
 ## imap.mail.yahoo.com - 993
 ## smtp.mail.yahoo.com - 465
 
+##evolution
+sudo apt-get remove evolution
+sudo apt-get update
+sudo apt-get install evolution
+sudo apt-get install evolution-ews
+https://mail.sunrise.net/EWS/Exchange.asmx
+
+##Mail convertor
+sudo apt-get install libemail-outlook-message-perl libemail-sender-perl
+msgconvert *.msg
+
 #Drop Box  – via .deb from internet.
+via AUR for Manjaro
 
 # KeePassX 2 – Backup 
 sudo add-apt-repository ppa:eugenesan/ppa
@@ -84,6 +111,16 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt install chromium-browser
 sudo apt install firefox
+* Web Browser - AdBlock, Privacy Badger, OneTab, Stylus, Vue Devtools
+	Extensions
+		CaretTab - New Tab Clock and Date
+		JSON Viewer
+		React
+		JavaScript and CSS Code Beautifier
+		JSONViewer
+		Wizdler
+		Requestly: Redirect Url, Modify Headers etc
+		EverSync - Sync bookmarks, backup favorites
 
 sudo snap install opera
 # from Opera Store
@@ -106,8 +143,9 @@ sudo snap install opera
 
 
 # Manjaro printer installation
+can be installaed from - cnijfilter2-6.00-1-x86_64.pkg.tar.zst 
 Goto URL https://aur.archlinux.org/packages/cnijfilter2/ and download PKGFILE
-install sudo pacman -S base-devel for default=all
+install sudo pacman -S base-devel
 makepkg in PKGFILE dir
 install cnijfilter2-6.00-1-x86_64.pkg.tar.zst via software manager
 
@@ -115,7 +153,7 @@ tocanonij
 cnijlgmon3
 	network cnijbe2://Canon/?port=net&serial=00-BB-C1-DC-13-B1 "Canon E470 series" "Canon-E470-series_00-BB-C1-DC-13-B1"
 	localhost:631
-	system-config-printer 
+	system-config-printer
 tocnpwg
 
 ## Albert
@@ -171,19 +209,55 @@ sudo update-alternatives --config java
 
 
 #Node and NPP Install Node.js Version – 6.x on Ubuntu 16.04
+
+pamac install nvm
+	You need to source nvm before you can use it. Do one of the following
+	or similar depending on your shell (and then restart your shell):
+
+	  echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
+	  echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
+
+	You can now install node.js versions (e.g. nvm install 10) and
+	activate them (e.g. nvm use 10).
+
+	init-nvm.sh is a convenience script which does the following:
+
+	[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+	source /usr/share/nvm/nvm.sh
+	source /usr/share/nvm/bash_completion
+	source /usr/share/nvm/install-nvm-exec
+
+	You may wish to customize and put these lines directly in your
+	.bashrc (or similar) if, for example, you would like an NVM_DIR
+	other than ~/.nvm or you don't want bash completion.
+
+	See the nvm readme for more information: https://github.com/creationix/nvm
+
+npm installation via nvm	
+	nvm install 10.23.0 
+		v10.23.0 
+		v6.14.8
+
+	
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 
 #intellij
 sudo snap install intellij-idea-ultimate --classic
+pamac install intellij-idea-community-editio
+
 
 #Terminal
 #open Gnome terminal /usr/bin/gnome-terminal
 #Terminator
 sudo apt install fortune-mod
+pamac install fortune-mod
 sudo apt install cowsay
 sudo apt-get install terminator
+	In case issue with validate lib
+	sudo pacman -U https://mirror.f4st.host/archlinux/community/os/x86_64/terminator-2.0.1-1-any.pkg.tar.zst
+https://ohmyz.sh/#install
 #Copy .bashrc from github
 ## change size of terminator
 gedit ~/.config/terminator/config 
@@ -208,8 +282,14 @@ OS VPN plugin for cisco open connect
 sudo apt-get install network-manager-openconnect-gnome
 # https://vpn01.sunrise.net/VPN_sunrise
 ## Add 10.0.0.0 as vdi are having dynamic range when starts.
-Add Routes for 192.168.0.0,10.0.0.0,212.35.60.0
+Add Routes for 
+	192.168.0.0,
+	10.0.0.0,
+	212.35.60.0,
+	212.35.39.0
 
+Set autoroute disable
+set use connection only for resource on it to true.
 	excluded
 	mail.sunrise.net (212.35.62.52)
 
@@ -226,37 +306,68 @@ Add Routes for 192.168.0.0,10.0.0.0,212.35.60.0
 			vdi.sunrise.net (195.141.180.40)
 			Dynamic IP, can’t be hard coded.
 	212.35.60.0
-	www-t01.sunrise.ch (212.35.60.21)
+		www-t01.sunrise.ch (212.35.60.21)
+	212.35.39.0
+		www-t01.sunrise.ch (212.35.60.21)
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         www.routerlogin 0.0.0.0         UG    100    0        0 enp3s0
+10.0.0.0        0.0.0.0         255.0.0.0       U     50     0        0 vpn0
+10.80.0.0       0.0.0.0         255.255.240.0   U     50     0        0 vpn0
+172.16.0.0      0.0.0.0         255.240.0.0     U     100    0        0 enp3s0
+www.routerlogin 0.0.0.0         255.255.255.255 UH    100    0        0 enp3s0
+192.168.0.0     0.0.0.0         255.255.0.0     U     50     0        0 vpn0
+vpn02.sunrise.n www.routerlogin 255.255.255.255 UGH   100    0        0 enp3s0
+212.35.39.0     0.0.0.0         255.255.255.0   U     50     0        0 vpn0
+212.35.60.0     0.0.0.0         255.255.255.0   U     50     0        0 vpn0
+
 
 	Except - 
-	sudo ip route add 212.35.60.35 via 10.0.0.1 dev wlp4s0
-	sudo ip route add 212.35.60.35 via 192.168.1.1 dev enp3s0
+		Add exception for Sunrise.ch
+			sudo ip route add 10.192.0.0 via 0.0.0.0 dev vpn0
+			sudo ip route add 192.168.0.0 via 0.0.0.0 dev vpn0
+			sudo ip route add 212.35.60.35 via 10.0.0.1 dev wlp4s0
+			sudo ip route add 212.35.60.35 via 172.16.1.0 dev enp3s0
+
+
+sudo systemctl start systemd-resolved 
+sudo systemctl enable systemd-resolved
+	
+#Mode -1 via local server at 127.0.0.53
+	sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+#Mode - 2 via static configuration
+	sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+sudo systemctl restart NetworkManager
+#check status with
+	systemctl status systemd-resolved.service
+
+sudo systemctl disable systemd-resolved
+sudo systemctl stop systemd-resolved
+sudo systemctl restart NetworkManager
 
 ##VMWare
-chmod a+x VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
-sudo ./VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
-### https://iag-vdi.sunrise.net
-### https://vdi.swi.srse.net
+Ubuntu
+	chmod a+x VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
+	sudo ./VMware-Horizon-Client-2006-8.0.0-16522670.x64.bundle
+	### https://iag-vdi.sunrise.net
+	### https://vdi.swi.srse.net
+Manjaro
+	vmware-horizon-client ->  Install via AUR
 
+Uninstall
 sudo env VMWARE_KEEP_CONFIG=yes \
 ./VMware-Horizon-Client-x.x.x-yyyyyyy.arch.bundle -u vmware-horizon-client
-
-
-##evolution
-sudo apt-get remove evolution
-sudo apt-get update
-sudo apt-get install evolution
-sudo apt-get install evolution-ews
-https://mail.sunrise.net/EWS/Exchange.asmx
-
-##Mail convertor
-sudo apt-get install libemail-outlook-message-perl libemail-sender-perl
-msgconvert *.msg
 
 ##MSteams
 sudo snap install teams-for-linux
 ##Change the permision from software center
 sudo dpkg -i teams_1.3.00.25560_amd64.deb
+Manjaro
+	install version 1.0.3 from AUR repo.
+	RTC dependencies should be installed for screen sharing.
+	Wayland could be the issue so try x11 in cased of issue
 
 ## Setup Samba server
 sudo apt update

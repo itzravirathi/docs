@@ -144,7 +144,7 @@ PS1="$EMOJI >"
 
 fortune | cowsay -f tux
 
-alias sandbox='cd /media/rathi/Etc/office-office/sandbox/'
+alias sandbox='cd /run/media/raviprakashrathi/Etc/office-office/sandbox/'
 alias chrome-cors='google-chrome --disable-web-security --user-data-dir=/home/rathi/non-default-chrome -ignore-certificate-errors'
 alias etc='cd /media/rathi/Etc/'
 alias docs='cd /media/rathi/Docs/'

@@ -1,0 +1,322 @@
+http://www.journaldev.com/3633/hibernate-interview-questions-and-answershttp
+http://javahungry.blogspot.com/2013/06/top-25-most-frequently-asked-core-java.html
+http://java67.blogspot.in/2012/09/top-10-tricky-java-interview-questions-answers.html
+http://javarevisited.blogspot.sg/2011/07/java-multi-threading-interview.html
+http://a4academics.com/interview-questions/54-core-java-swing/506-core-java-interview-questions-and-answers
+http://javarevisited.blogspot.sg/2012/06/20-design-pattern-and-software-design.html
+http://java-interview-questions.com/core-java-interview-questions-part-8/?_lbGate=468086
+http://java-interview-questions.com/240corejavainterviewquestionsandanswers/?_lbGate=468054
+
+ 8. What is difference between Executor.submit() and Executer.execute() method ?
+    There is a difference when looking at exception handling. If your tasks throws an exception and if it was submitted with execute this exception will go to the uncaught exception handler (when you don't have provided one explicitly, the default one will just print the stack trace to System.err). If you submitted the task with submit any thrown exception, checked exception or not, is then part of the task's return status. For a task that was submitted with submit and that terminates with an exception, the Future.get will re-throw this exception, wrapped in an ExecutionException.
+
+24. What is difference between CyclicBarrier and CountDownLatch in Java
+http://tutorials.jenkov.com/java-concurrency/index.html
+http://tutorials.jenkov.com/java-util-concurrent/cyclicbarrier.html
+
+What will happen if non-synchronized method calls a static synchronized method and what kind of lock it acquires?
+If non-static synchronized method calls a static synchronized method it acquires both lock i.e. lock on the object and lock on the class level.
+Class lock does not actually exist the class lock, is the object lock of the “Class” object that models the class. Since there is only one “Class” object per class, using this object achieves the synchronization for static method.
+    Only one thread can execute a synchronized static method per class.
+    Only one thread per instance of the class can execute a non-static synchronized method.
+    Any number of threads can execute a non-synchronized method static or non-static method. 
+	
+
+    Synchronization in java guarantees that no two threads can execute a synchronized method which requires same lock simultaneously or concurrently.
+    
+	synchronized keyword can be used only with methods and code blocks. These methods or blocks can be static or non-static both.
+    
+	When ever a thread enters into java synchronized method or block it acquires a lock and whenever it leaves java synchronized method or block it releases the lock. 
+	Lock is released even if thread leaves synchronized method after completion or due to any Error or Exception.
+    
+	java synchronized keyword is re-entrant in nature it means if a java synchronized method calls another synchronized method which requires same lock then current thread which is holding lock can enter into that method without acquiring lock.
+
+
+    Java Synchronization will throw NullPointerException if object used in java synchronized block is null.
+	For example, in above code sample if lock is initialized as null, the synchronized (lock) will throw NullPointerException.
+
+    Synchronized methods in Java put a performance cost on your application. So use synchronization when it is absolutely required. 
+	Also, consider using synchronized code blocks for synchronizing only critical section of your code.
+
+    It’s possible that both static synchronized and non static synchronized method can run simultaneously or concurrently because they lock on different object.
+	
+    According to the Java language specification you can not use java synchronized keyword with constructor it’s illegal and result in compilation error.
+    
+	Do not synchronize on non final field on synchronized block in Java. 
+	because reference of non final field may change any time and then different thread might synchronizing on different objects i.e. no synchronization at all. 
+	Best is to use String class, which is already immutable and declared final.
+	
+================================================
+Java
+================================================
+Collection
+
+	equals returns false , hashcode =1 ==> enter three 3 object
+
+	Changes while iteration in Collection, why not
+		Itertor check for modCount while executing next method and compare modcount with expectedmodcount=initial size. if it's not same then raise a exception.
+		we can you itertor.remove() method for that or we user listiterator or concurrenthasmap for the implementaion.
+
+	listiterator vs. ListIterator
+		1) Iterator is used for traversing List and Set both.
+		We can use ListIterator to traverse List only, we cannot traverse Set using ListIterator.
+
+		2) We can traverse in only forward direction using Iterator.
+		Using ListIterator, we can traverse a List in both the directions (forward and Backward).
+
+		3) We cannot obtain indexes while using Iterator
+		We can obtain indexes at any point of time while traversing a list using ListIterator. The methods nextIndex() and previousIndex() are used for this purpose.
+
+		4) We cannot add element to collection while traversing it using Iterator, it throws ConcurrentModificationException when you try to do it.
+		We can add element at any point of time while traversing a list using ListIterator.
+
+		5) We cannot replace the existing element value when using Iterator.
+		By using set(E e) method of ListIterator we can replace the last element returned by next() or previous() methods.
+
+	internal datastructure for set
+
+		Hashset internally use HashMap .
+		Elements passed to Hashset are stored as a key of the HashMap with null as value.
+		time complexity O(1)
+
+		TreeSet is implemented using a tree structure(red-black tree in algorithm book).
+		The elements in a set are sorted, but the add, remove, and contains methods has  time complexity of O(log (n)).
+		A red-black tree is a binary search tree which has the following red-black properties:
+			Every node is either red or black.
+			Every leaf (NULL) is black.
+			If a node is red, then both its children are black.
+			Every simple path from a node to a descendant leaf contains the same number of black nodes.
+
+		ListHashSet
+		It is implemented as a hash table with a linked list running through it, so it provides the order of insertion.
+
+
+	map odering
+		From the Javadoc: HashMap "class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time."
+		If you need consistent ordering, you can use LinkedHashMap (for insertion/access order), or TreeMap (for comparision order). Please note, that these maintain the order of the keys, not the values.
+
+	 HashMap vs ConcurrentHashMap
+		Thread -Safe :
+			ConcurrentHashMap is thread-safe that is the code can be accessed by single thread at a time .
+			while HashMap is not thread-safe .
+		Synchronization Method :
+			HashMap can be synchronized by using synchronizedMap(HashMap) method .
+			By using this method we get a HashMap object which is equivalent to the HashTable object . So every modification  is performed  on  Map is locked on Map object.
+			ConcurrentHashMap synchronizes or locks on the certain portion of the Map . To optimize the performance of ConcurrentHashMap
+			, Map is divided into different partitions depending upon the Concurrency level . So that we do not need to synchronize the whole Map Object.
+		Null Key
+			ConcurrentHashMap does not allow NULL values . So the key can not be null in
+			ConcurrentHashMap .While In HashMap there can only be one null key .
+		Performance
+			In multiple threaded environment HashMap is usually faster than ConcurrentHashMap . As only single thread can access the certain portion of the Map and thus reducing the performance .
+			While in HashMap any number of threads can access the code at the same time.
+
+	Difference between ConcurrentHashMap and Collections.synchronizedMap( HashMap )
+			Both are synchronized version of HashMap, with difference in their core functionality and internal structure.
+			As stated above, ConcurrentHashMap is consist of internal segments which can be viewed as independent HashMaps, conceptually. All such segments can be locked by separate threads in high concurrent executions. In this way, multiple threads can get/put key-value pairs from ConcurrentHashMap without blocking/waiting for each other.
+
+	hashtable vs hasmap
+			The major difference is that HashTable is synchronized and HashMap is not.
+			HashMap supports null key (mapped to zero bucket), HashTable does not support null keys and throws NullPointerException on such attempt.
+
+	HashCode and Equals method
+	1) Always use same attributes of an object to generate hashCode() and equals() both. As in our case, we have used employee id.
+	2) equals() must be consistent (if the objects are not modified, then it must keep returning the same value).
+	3) Whenever a.equals(b), then a.hashCode() must be same as b.hashCode().
+	4) If you override one, then you should override the other.
+
+	HashCode and Equals contract
+        - Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
+        - If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result.
+        - It is not required that if two objects are unequal according to the equals(java.lang.Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hashtables.
+
+	Internal mahnism of haspMap get and put
+		I simply answer: “On principle of Hashing“.
+		Hashing in its simplest form, is a way to assigning a unique code for any variable/object after applying any formula/algorithm on its properties. A true Hashing function must follow this rule:
+		Hash function should return the same hash code each and every time, when function is applied on same or equal objects. In other words, two equal objects must produce same hash code consistently.
+
+	put
+		-- First of all, key object is checked for null. If key is null, value is stored in table[0] position. Because hash code for null is always 0.
+		-- Then on next step, a hash value is calculated using key’s hash code by calling its hashCode() method. This hash value is used to calculate index in array for storing Entry object. JDK designers well assumed that there might be some poorly written hashCode() functions that can return very high or low hash code value. To solve this issue, they introduced another hash() function, and passed the object’s hash code to this hash() function to bring hash value in range of array index size.
+		-- Now indexFor(hash, table.length) function is called to calculate exact index position for storing the Entry object.
+		-- Here comes the main part. Now, as we know that two unequal objects can have same hash code value, how two different objects will be stored in same array location [called bucket].
+		Answer is LinkedList. If you remember, Entry class had an attribute “next”. This attribute always points to next object in chain. This is exactly the behavior of LinkedList.
+		So, in case of collision, Entry objects are stored in LinkedList form. When an Entry object needs to be stored in particular index, HashMap checks whether there is already an entry?? If there is no entry already present, Entry object is stored in this location.
+		if there is already an object sitting on calculated index, its next attribute is checked. If it is null, and current Entry object becomes next node in LinkedList. If next variable is not null, procedure is followed until next is evaluated as null.
+	get
+		Data structure to store Entry objects is an array named table of type Entry.
+		A particular index location in array is referred as bucket, because it can hold the first element of a LinkedList of Entry objects.
+		Key object’s hashCode() is required to calculate the index location of Entry object.
+		Key object’s equals() method is used to maintain uniqueness of Keys in map.
+		Value object’s hashCode() and equals() method are not used in HashMap’s get() and put() methods.
+		Hash code for null keys is always zero, and such Entry object is always stored in zero index in Entry[].
+
+	2. Assignment ArrayList of NullPointerException to List of RunTimeException.
+	Ans. Strict Type matching can't convert NullPointerException to RunTimeException
+	List<RuntimeException> xyz = new ArrayList<NullPointerException>(); -- Will not compile
+	List<? extends RuntimeException> xyz = new ArrayList<NullPointerException>(); -- Will  compile
+
+	3. Make unique ArrayList without using Set.
+	Ans. Use contains(Object) function for serach before insertion of any element in ArrayList
+
+	13. AbstractHashMap Collection
+	http://www.jroller.com/VelkaVrana/entry/java_1_6_collections_class
+	
+
+
+		
+Map(I) ==> when finding somethIng by key matters
+                AbstractMap - HashTable(C)
+							  LinkedHashMap(C)
+							  HashMap(C)
+							  ConcurrentHashMap(c)
+                Sorted Map(I) - TeeMap
+
+Collection(I)
+                Set(I) ==> when uniqueness matters
+                                HashSet(C)
+                                LinkedHashSet(C)
+                                SortedSet(I) - TreeSet(C)
+                List(I) ==> when sequence matters
+                                ArrayList(C)
+                                Vector(C)
+                                LinkedList(C)
+                Queue(I)
+                                LinkedList(C)
+                                PriorityQueue(C)
+
+
+Imutable class creation
+An immutable class is one whose state can not be changed once created.
+                1) Don’t provide “setter” methods — methods that modify fields or objects referred to by fields.
+                2) Make all fields final and private
+                3) Don’t allow subclasses to override methods (Final Methods)
+                4) Special attention when having mutable instance variables. return new objects with copied content for all mutable objects.
+
+
+1. Create a new Sting with null argument in constructor.
+Ans. Not possible
+
+Multi Threading
+create Thread
+
+abstraction (4 Principal of OPPs)
+
+Marker Interface for serialization
+Marker interface is used as a tag to inform a message to the java compiler so that it can add special behaviour to the class implementing it. Java marker interface has no members in it.
+
+
+interface and abstract class
+
+advantage of abstract class over interface
+    Main difference is methods of a Java interface are implicitly abstract and cannot have implementations. A Java abstract class can have instance methods that implements a default behavior.
+    Variables declared in a Java interface is by default final. An  abstract class may contain non-final variables.
+    Members of a Java interface are public by default. A Java abstract class can have the usual flavors of class members like private, protected, etc..
+    Java interface should be implemented using keyword “implements”; A Java abstract class should be extended using keyword “extends”.
+    An interface can extend another Java interface only, an abstract class can extend another Java class and implement multiple Java interfaces.
+    A Java class can implement multiple interfaces but it can extend only one abstract class.
+    Interface is absolutely abstract and cannot be instantiated; A Java abstract class also cannot be instantiated, but can be invoked if a main() exists.
+    In comparison with java abstract classes, java interfaces are slow as it requires extra indirection.
+
+4. InterFace with same value with combination of extends.
+Ans. will not be an issue method signatue is same including return type.
+
+singleton class
+    Private Static member : This contains the instance of the singleton class.
+    Private constructor : This will prevent anybody else to instantiate the Singleton class.
+    Static public method + Null check: This provides the global point of access to the Singleton object and returns the instance to the client calling class.
+
+
+static field serialization
+	 Static fields will be reinitialized to whatever value they are set to when the class is loaded. 
+
+The transient 
+keyword in Java is used to indicate that a field should not be serialized.
+
+Volatile
+    The value of this variable will never be cached thread-locally: all reads and writes will go straight to "main memory";
+    Access to the variable acts as though it is enclosed in a synchronized block, synchronized on itself. 
+
+
+Seriliazation
+Java provides a mechanism, called object serialization where an object can be represented as a sequence of bytes that includes the object's data as well as information about the object's type and the types of data stored in the object.
+After a serialized object has been written into a file, it can be read from the file and deserialized that is, the type information and bytes that represent the object and its data can be used to recreate the object in memory.
+The value of the SSN field was 11122333 when the object was serialized, but because the field is transient, this value was not sent to the output stream. The SSN field of the deserialized Employee object is 0.
+
+Serialization ID
+When an object is serialized, the serialVersionUID is serialized along with the other contents.
+Later when that is deserialized, the serialVersionUID from the deserialized object is extracted and compared with the serialVersionUID of the loaded class.
+
+stop object cloning
+cloning through exception
+	deep copying
+					A deep copy means actually creating a new array and copying over the values.
+	Shallow Copy
+					Shallow copy is a bit-wise copy of an object. A new object is created that has an exact copy of the values in the original object
+	defensive copy
+					Return new objects of an mutable instance for a Imutable class.
+	cloning
+					a way of creation of new copy of object. Object class should implements cloanable interface and implements clone method.
+	Copy constructors
+					A way to create new object with the help existing own object in customer argument.
+
+
+Important point about Autoboxing and Unboxing in Java
+1) Compiler uses valueOf() method to convert primitive to Object and uses intValue(), doubleValue() etc to get primitive value from Object.
+2)  During autoboxing boolean is converted to Boolean, byte to Byte, char converted to Character, float changes to Float, int goes to Integer, long goes to Long and short converts to Short, while in unboxing opposite happens like Float to float.
+
+
+permgenspace
+ Class declarations are loaded into a specific memory region, named Permanent Generation (PermGen for short).So – to recap: all Java classes are loaded and stored in the Java PermGen. This consists of the following:
+    Names of the classes
+    Fields of the class
+    Methods of a class with the bytecode of the methods
+    Constant pool information
+    Object arrays and type arrays associated with a class
+    Just In Time compiler optimizations
+
+
+process to load a class
+
+classnofound and nodefcalass found
+9. Classloders type in Java
+                1. Bootstrap Class Loader
+                                Bootstrap class loader loads java’s core classes like java.lang, java.util etc. These are classes that are part of java runtime environment. Bootstrap class loader is native implementation and so they may differ across different JVMs.
+                2. Extensions Class Loader
+                                JAVA_HOME/jre/lib/ext contains jar packages that are extensions of standard core java classes. Extensions class loader loads classes from this ext folder. Using the system environment propery java.ext.dirs you can add ‘ext’ folders and jar files to be loaded using extensions class loader.
+                3. System Class Loader
+                                Java classes that are available in the java classpath are loaded using System class loader.
+http://java67.blogspot.sg/2012/09/top-10-tough-core-java-interview-questions-answers.html
+
+
+overloading and overriding diff
+1. Overriding rules
+The argument list should be exactly the same as that of the overridden method.
+A method can only be overridden in sub class, not in same class.
+Overriding method can not reduce access of overridden method. It means if overridden method is defined as public than overriding method can not be protected or package private.
+private, static and final method can not be overridden in Java.
+Return type of overriding method must be same as overridden method.
+
+Overriding method cannot throw checked Exception which is higher in hierarchy, than checked Exception thrown by overridden method
+    If the superclass method does not declare an exception
+         subclass overridden method cannot declare the checked exception but it can declare unchecked exception.
+    If the superclass method declares an exception
+         subclass overridden method can declare same, subclass exception or no exception but cannot declare parent exception.
+
+
+1. Overloading rules
+ First and foremost rule to overload a method in Java is to change method signature. 
+ method signature is made of number of arguments, type of arguments and order of arguments if they are of different types. You can change any of these or combinations of them to overload a method in Java.
+ Return type of method is not part of method signature, so just changing the return type will not overload a method in Java.
+
+
+2. GC algorithm
+Ans.
+                1. Serial GC
+                2. Parallel GC
+                3. Mostly-Concurrent GC(also known as Concurrent Mark-Sweep GC(CMS))
+                4. Garbage First GC (G1)
+
+				4. Memory Heap Management
+Ans. Menaged by Edens, Surviour, Old Heaps Area.
+                All new objects are created in Edens then move Surviour if they remains live after GC run. After number of GC cycle Object will be moved to Old Heap.

@@ -1,0 +1,120 @@
+http://www.techiecommunity.net/Webservices/REST-Interview-Questions-Answer
+http://www.javaexperience.com/rest-web-service-interview-questions/#ixzz3JEsoY31J
+http://www.javaface.com/19-restful-web-service-interview-questions/
+
+RESTful web services use HTTP protocol methods for the operations they perform.Methods are:
+
+    GET:It defines a reading access of the resource without side-effects.This operation is idempotent i.e.they can be applied multiple times without changing the result
+    PUT :  It creates a new resource.It must also be idempotent.
+    DELETE : It removes the resources. The operations are idempotent i.e. they can get repeated without leading to different results.
+    POST :It updates an existing resource or creates a new resource.
+	
+	
+
+How can you apply security to RESTful services
+
+Some of the options available to use for securing a RESTful service, for now, are
+1. Basic Authentication
+   This type of Authentication will require transport level encryption(SSL), as user
+   credentials are to be sent via wire in plain text.
+
+2. OAuth 1.0a / OAuth 2.0
+   OAuth 1.0a is using advanced encryption for passing token for authentication purposes.
+   OAuth 2.0 is using SSL for transport level security.
+
+What are the annotations that can be used for specifying content-type that is supported
+by any RESTful service?
+
+	@Produces("text/xml") and @Consumes("text/xml") are the annotations that are used for specifying
+	ways of defining any restrictions that can be defined at method-level for any RESTful service.s
+
+What are the various annotations available from JAX-RS api specification,
+   for sending data from client-side to service endpoint?
+    
+	This is how I would answer  this question
+	JAX-RS has provided various annotations for passing data from client-side code
+	to service are @PathParam, @FormParam, @MatrixParam, @QueryParam, @HeaderParam, @CookieParam.
+	These annotations are also known as Injection Annotations from JAX-RS API.
+
+For using JAXB supported XML to Custom-object and Custom-object to XML mapping/conversion,
+  along with RESTful service, what are the annotations those can be used along with custom object?
+
+	@XmlRootElement, @XmlElement, @XmlAttribute, @XmlAccessorType etc., are the annotations from JAXB
+	can be used along with custom class for defining class, field level fields.
+
+Have you used Jersey framework or any other implementation for JAX-RS specification?
+
+	Answer :
+	Jersey Framework can be used along with web container that is having support for JAX-RS
+	or not. Where as any web container that has support for JAX-RS specification, can be used
+	to provide a resource as RESTful web service.
+
+Jersey
+
+Jersey is the reference implementation for the JSR 311 specification.
+
+What is the Caching mechanism that a RESTful service would provide?
+	These are in form of various directives used along with header such as Cache-Control.
+	private, public, no-cache, no-store, no-transform, max-age, s-maxage.
+
+What are the differences between no-cache, and no-store directives used along with
+   Cache-Control header?
+
+	This is how I would answer  this question
+	no-cache can be set in response in order to inform client/browser that this response
+	should not be used for caching content and any of the cache data should not be sent to
+	server without revalidation from server.
+
+	While no-store is to inform client/browser as not to store any data in response in local
+	hard disk of the machine that is used for sending the request.
+
+If any intermediary proxy is not used to server any response to client's request,
+is there any difference between private and public directives of Cache-Control?
+
+	No, as private directive may be used to restrict cahing at proxy/CDN server that could
+	be some intermediary destinations while serving response.
+
+
+What are the various annotations available from JAX-RS api specification,
+   for sending data from client-side to service endpoint?
+	JAX-RS has provided various annotations for passing data from client-side code
+	to service are @PathParam, @FormParam, @MatrixParam, @QueryParam, @HeaderParam, @CookieParam.
+	These annotations are also known as Injection Annotations from JAX-RS API.
+
+How to inject Web container related values and configurations to the JAX-RS service
+	   implementation instance
+	There is an annotation @Context provided by JAX-RS specification for the REST service
+	Implemntation to be able to receive helper and web container specific configuration values.
+
+@MatrixParam("age") would return 34 as value, as matrix param precedes with a ';' as separator.
+
+
+Are you aware of @BeanParam annotation?
+	Yes, @BeanParam annotation is added in JAX-RS 2.0 version. This annotation can be used
+	along with a Bean class for using other annotation types such as @FormParam, @HeaderParam etc.
+	as the field level, for using an application specific bean class as argument in the service
+	method, rather than using a long list of argument parameters for each of the different type of
+	attributes used along with a request.
+
+	
+1) What is a web service?
+2) Can I use GET request instead of PUT to create resources?
+3) What is the difference between a RESTful web service (on HTTP) and a HTTP Servlet both of which perform the same function?
+4) How will you migrate from SOAP web service to RESTfull web service?
+5) What is the difference between HTTP POST and PUT requests?
+6) What all kind of output formats can one generate using RESTful web service?
+7) What all tools have you used to write RESTful web service?
+8) Can my web browser be a client to RESTful web service? If yes then how will you generate DELETE request from web browser?
+9) What is meant by JAX-WS and JAX-RS?
+10) How is JAXB related to RESTful web services?
+11) How will you handle synchronization issues when multiple clients try to consume web service simultaneously?
+12) Can you describe any one RESTful web service you have written?
+13) What will you do when an error code has to be returned to the client
+	OR How will you handle application error scenarios in RESTful web service
+14) Is it mandatory to use HTTP protocol for performing CRUD operations by a REST based web service?
+15) What are the pros and cons of using the RESTLET framework than CXF for writing RESTful web service?
+16) Can one RESTful web service be a client to another RESTful web service for performing business operations? Describe with example?
+17) Can you generate HTML output from a RESTful web service? How?
+18) Can a RESTful web service generate output in various formats based on some parameter received from the client.
+19) With a RESTful web service, whose state is getting transferred and how?
+20) Who owns the specification for REST web services and how does it get updated to newer versions?

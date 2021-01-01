@@ -1,0 +1,134 @@
+﻿http://www.journaldev.com/1827/java-design-patterns-example-tutorial
+
+================================================
+Design Pattern
+================================================
+
+design pattern
+
+singlton desigen pattern
+	define singleton class
+Design Principals
+
+Creational design patterns
+    Abstract Factory
+    Builder
+    Factory Method
+    Object Pool
+    Prototype
+    Singleton
+		    Eager initialization
+			Static block initialization
+			Lazy Initialization
+			Thread Safe Singleton -- Best 
+			Bill Pugh Singleton Implementation -- Best
+			Using Reflection to destroy Singleton Pattern
+			Enum Singleton -- Best
+			Serialization and Singleton
+
+Structural design patterns
+
+    Adapter
+    Bridge
+    Composite
+    Decorator
+    Facade
+    Flyweight
+    Private Class Data
+    Proxy
+
+Behavioral design patterns
+    Chain of responsibility
+    Command
+    Interpreter
+    Iterator
+    Mediator
+    Memento
+    Null Object
+    Observer
+    State
+    Strategy
+    Template method
+    Visitor
+		
+
+1) Creational Pattern
+Factory Method Pattern
+we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+
+Abstract Factory Pattern
+Abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories.
+
+Singleton Pattern
+This pattern involves a single class which is responsible to create an object while making sure that only single object gets created. This class provides a way to access its only object which can be accessed directly without need to instantiate the object of the class.
+
+Builder Pattern
+A Builder class builds the final object step by step. This builder is independent of other objects.
+We have considered a business case of fast-food restaurant where a typical meal could be a burger and a cold drink. 
+
+Prototype Pattern
+his pattern involves implementing a prototype interface which tells to create a clone of the current object. 
+This pattern is used when creation of object directly is costly. 
+For example, an object is to be created after a costly database operation. 
+We can cache the object, returns its clone on next request and update the database as and when needed thus reducing database calls.
+
+
+
+
+Object Pool Pattern
+
+
+2) Structural Pattern
+Adapter Pattern
+This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces. 
+A real life example could be a case of card reader which acts as an adapter between memory card and a laptop. 
+You plugin the memory card into card reader and card reader into the laptop so that memory card can be read via laptop.
+We are demonstrating use of Adapter pattern via following example in which an audio player device can play mp3 files only and wants to use an advanced audio player capable of playing vlc and mp4 files. 
+
+
+Bridge Pattern
+This pattern involves an interface which acts as a bridge which makes the functionality of concrete classes independent from interface implementer classes. Both types of classes can be altered structurally without affecting each other.
+We have a DrawAPI interface which is acting as a bridge implementer and concrete classes RedCircle, GreenCircle implementing the DrawAPI interface. 
+Shape is an abstract class and will use object of DrawAPI. BridgePatternDemo, our demo class will use Shape class to draw different colored circle.
+
+Composite Pattern
+Composite pattern is used where we need to treat a group of objects in similar way as a single object. Composite pattern composes objects in term of a tree structure to represent part as well as whole hierarchy. This type of design pattern comes under structural pattern as this pattern creates a tree structure of group of objects.
+We have a class Employee which acts as composite pattern actor class. 
+CompositePatternDemo, our demo class will use Employee class to add department level hierarchy and print all employees.
+
+Decorator Pattern
+This pattern creates a decorator class which wraps the original class and provides additional functionality keeping class methods signature intact.
+Decorator pattern allows a user to add new functionality to an existing object without altering its structure. This type of design pattern comes under structural pattern as this pattern acts as a wrapper to existing class.
+
+Facade Pattern
+Flyweight Pattern
+
+proxy Pattern
+In proxy pattern, we create object having original object to interface its functionality to outer world.
+We are going to create an Image interface and concrete classes implementing the Image interface. 
+ProxyImage is a a proxy class to reduce memory footprint of RealImage object loading.
+
+
+3) Behavioral Pattern
+Chain of Responsibility
+This pattern decouples sender and receiver of a request based on type of request. This pattern comes under behavioral patterns.
+In this pattern, normally each receiver contains reference to another receiver. If one object cannot handle the request then it passes the same to the next receiver and so on.
+
+
+Command Pattern
+ A request is wrapped under an object as command and passed to invoker object. 
+ Invoker object looks for the appropriate object which can handle this command and passes the command to the corresponding object which executes the command.
+ We have concrete command classes BuyStock and SellStock implementing Order interface which will do actual command processing. A class Broker is created which acts as an invoker object. It can take and place orders.
+ 
+ 
+Interpreter Pattern
+Iterator Pattern
+
+Observer pattern
+Observer pattern is used when there is one-to-many relationship between objects such as if one object is modified, its depenedent objects are to be notified automatically. Observer pattern falls under behavioral pattern category.
+
+State pattern
+we create objects which represent various states and a context object whose behavior varies as its state object changes.
+Strategy pattern
+we create objects which represent various strategies and a context object whose behavior varies as per its strategy object. 
+The strategy object changes the executing algorithm of the context object.

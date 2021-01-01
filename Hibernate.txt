@@ -1,0 +1,194 @@
+Imp Link
+http://www.journaldev.com/3633/hibernate-interview-questions-and-answers
+
+session factory theard safe, but session is not thread safe
+
+
+differences between get() vs load():
+    get() loads the data as soon as it’s called whereas load() returns a proxy object and loads data only when it’s actually required, so load() is better because it support lazy loading.
+    Since load() throws exception when data is not found, we should use it only when we know data exists.
+    We should use get() when we want to make sure data exists in the database.
+
+Hibernate first level cache
+	Hibernate first level cache is associated with the Session object. Hibernate first level cache is enabled by default and there is no way to disable it. 
+	However hibernate provides methods(session.evict(emp),session.clear()) through which we can delete selected objects from the cache or clear the cache completely.
+
+Second Level Cache: 
+	Hibernate Second Level cache is disabled by default but we can enable it through configuration. 
+	Currently EHCache and Infinispan provides implementation for Hibernate Second level cache and we can use them. 
+	
+	Add hibernate-ehcache dependency in your maven project,
+	<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+	<!-- For singleton factory --> 	<!-- <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property> 	-->
+	<!-- enable second level cache and query cache -->
+	<property name="hibernate.cache.use_second_level_cache">true</property>
+	<property name="hibernate.cache.use_query_cache">true</property>
+	<property name="net.sf.ehcache.configurationResourceName">/myehcache.xml</property>
+			<?xml version="1.0" encoding="UTF-8"?>
+			<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+				monitoring="autodetect" dynamicConfig="true">
+				<diskStore path="java.io.tmpdir/ehcache" />
+				<defaultCache maxEntriesLocalHeap="10000" eternal="false"
+					timeToIdleSeconds="120" timeToLiveSeconds="120" diskSpoolBufferSizeMB="30"
+					maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120"
+					memoryStoreEvictionPolicy="LRU" statistics="true">
+					<persistence strategy="localTempSwap" />
+				</defaultCache>
+				<cache name="employee" maxEntriesLocalHeap="10000" eternal="false"
+					timeToIdleSeconds="5" timeToLiveSeconds="10">
+					<persistence strategy="localTempSwap" />
+				</cache>
+				<cache name="org.hibernate.cache.internal.StandardQueryCache"
+					maxEntriesLocalHeap="5" eternal="false" timeToLiveSeconds="120">
+					<persistence strategy="localTempSwap" />
+				</cache>
+				<cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+					maxEntriesLocalHeap="5000" eternal="true">
+					<persistence strategy="localTempSwap" />
+				</cache>
+			</ehcache>
+			
+	@Entity
+	@Table(name = "ADDRESS")
+	@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="employee")
+	public class Address {
+	}
+    Read Only: This caching strategy should be used for persistent objects that will always read but never updated. 
+	It’s good for reading and caching application configuration and other static data that are never updated. 
+	This is the simplest strategy with best performance because there is no overload to check if the object is updated in database or not.
+    
+	Read Write: It’s good for persistent objects that can be updated by the hibernate application. 
+	However if the data is updated either through backend or other applications, 
+	then there is no way hibernate will know about it and data might be stale. So while using this strategy, make sure you are using Hibernate API for updating the data.
+    
+	Nonrestricted Read Write: If the application only occasionally needs to update data and strict transaction isolation is not required, 
+	a nonstrict-read-write cache might be appropriate.
+    
+	Transactional: The transactional cache strategy provides support for fully transactional cache providers such as JBoss TreeCache. 
+	Such a cache can only be used in a JTA environment and you must specify hibernate.transaction.manager_lookup_class.
+
+	
+Query Cache: 
+	Hibernate can also cache result set of a query. 
+	Hibernate Query Cache doesn’t cache the state of the actual entities in the cache; 
+	it caches only identifier values and results of value type. 
+	So it should always be used in conjunction with the second-level cache.
+
+An entity bean instance can exist is one of the three states.
+
+    Transient: When an object is never persisted or associated with any session, it’s in transient state. 
+	Transient instances may be made persistent by calling save(), persist() or saveOrUpdate(). Persistent instances may be made transient by calling delete().
+    
+	Persistent: When an object is associated with a unique session, it’s in persistent state. 
+	Any instance returned by a get() or load() method is persistent.
+    
+	Detached: When an object is previously persistent but not associated with any session, 
+	it’s in detached state. Detached instances may be made persistent by calling update(), saveOrUpdate(), lock() or replicate(). 
+	The state of a transient or detached instance may also be made persistent as a new persistent instance by calling merge().
+	
+sorted collection and ordered collection, which one is better?
+When we use Collection API sorting algorithms to sort a collection
+Ordered list is better than sorted list because the actual sorting is done at database level, that is fast and doesn’t cause memory issues. 	
+	List<Employee> empList = session.createCriteria(Employee.class).addOrder(Order.desc("id")).list();	
+	
+
+There are various ways to implement joins in hibernate.
+    Using associations such as one-to-one, one-to-many etc.
+    Using JOIN in the HQL query. There is another form “join fetch” to load associated data simultaneously, no lazy loading.
+    We can fire native sql query and use join keyword.
+
+
+Mapping
+Ont to One
+	
+	@OneToOne(mappedBy="txn")
+    @Cascade(value=org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Customer1 customer;
+	
+	@Id
+    @Column(name="txn_id", unique=true, nullable=false)
+    @GeneratedValue(generator="gen")
+    @GenericGenerator(name="gen", strategy="foreign", parameters={@Parameter(name="property", value="txn")})
+    private long id;
+    
+
+One to Many
+
+	<set name="items" table="ITEMS" fetch="select">
+            <key>
+                <column name="cart_id" not-null="true"></column>
+            </key>
+            <one-to-many class="Items"/>
+    </set>
+	or
+	@OneToMany(mappedBy="cart1")
+    private Set<Items1> items1;
+		
+		
+	<many-to-one name="cart" class="Cart">
+            <column name="cart_id" not-null="true"></column>
+    </many-to-one>
+	or 
+	 @ManyToOne
+    @JoinColumn(name="cart_id", nullable=false)
+    private Cart1 cart1;
+     
+	 
+Many to Many
+		@ManyToMany(targetEntity = Item1.class, cascade = { CascadeType.ALL })
+    @JoinTable(name = "CART_ITEMS", 
+                joinColumns = { @JoinColumn(name = "cart_id") }, 
+                inverseJoinColumns = { @JoinColumn(name = "item_id") })
+    private Set<Item1> items;
+	
+	
+================================================
+Hibernate
+================================================
+
+2. Difference between JPA and Hibernate
+3. How to use Native SQL in hibernate
+                createSQLQuery()
+                query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+                query.addEntity(Employee.class);
+                List results = query.list();
+
+4. Join to entities in Hibernate
+                Annotation         Package Detail/Import statement
+                @Entity         import javax.persistence.Entity;
+                @Table 			import javax.persistence.Table;
+                @Column         import javax.persistence.Column;
+                @Id        		import javax.persistence.Id;
+                @GeneratedValue import javax.persistence.GeneratedValue;
+                @Version        import javax.persistence.Version;
+                @OrderBy        import javax.persistence.OrderBy;
+                @Transient      import javax.persistence.Transient;
+                @Lob    		import javax.persistence.Lob;
+
+                Hibernate Association Mapping Annotations
+                @OneToOne     			import javax.persistence.OneToOne;
+                @ManyToOne  			import javax.persistence.ManyToOne;
+                @OneToMany  			import javax.persistence.OneToMany;
+                @ManyToMany     		import javax.persistence.ManyToMany;
+                @PrimaryKeyJoinColumn   import javax.persistence.PrimaryKeyJoinColumn;
+                @JoinColumn    			import javax.persistence.JoinColumn;
+                @JoinTable         		import javax.persistence.JoinTable;
+                @MapsId            		import javax.persistence.MapsId;
+                Hibernate Inheritance Mapping Annotations
+
+                @Inheritance    		import javax.persistence.Inheritance;
+                @DiscriminatorColumn 	import javax.persistence.DiscriminatorColumn;
+                @DiscriminatorValue     import javax.persistence.DiscriminatorValue;
+
+
+7. Hibernate Processing architecture
+
+Hibernate inverse properties
+The “inverse” keyword is always declare in one-to-many and many-to-many relationship (many-to-one doesn’t has inverse keyword), it means which side is responsible to take care of the relationship.
+
+cascade
+In cascade, after one operation (save, update and delete) is done, it decide whether it need to call other operations (save, update and delete) on another entities which has relationship with each other.
+
+difference between cascade & inverse in hibernate, what is the use of them?
+In short, the “inverse” is decide which side will update the foreign key, while “cascade” is decide what’s the follow by operation should execute.

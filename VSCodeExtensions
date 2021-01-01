@@ -1,9 +1,9 @@
+CoenraadS.bracket-pair-colorizer
+christian-kohler.npm-intellisense
+christian-kohler.path-intellisense
 
 apollographql.vscode-apollo
 BriteSnow.vscode-toggle-quotes
-christian-kohler.npm-intellisense
-christian-kohler.path-intellisense
-CoenraadS.bracket-pair-colorizer
 dbaeumer.vscode-eslint
 esbenp.prettier-vscode
 formulahendry.auto-close-tag
