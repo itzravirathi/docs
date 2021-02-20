@@ -28,8 +28,9 @@ curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.p
 #Disable CORS Client Side - https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 Chrome
 	Unix -> google-chrome --disable-web-security --user-data-dir=/home/rathi/non-default-chrome -ignore-certificate-errors
+			chromium --disable-web-security --user-data-dir=/home/rathi/non-default-chrome -ignore-certificate-errors
 	Windows -> "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
-
+	
 
 #Independent instance for workspaces ubuntu
 -> gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true

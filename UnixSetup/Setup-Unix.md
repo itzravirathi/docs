@@ -364,10 +364,19 @@ sudo env VMWARE_KEEP_CONFIG=yes \
 sudo snap install teams-for-linux
 ##Change the permision from software center
 sudo dpkg -i teams_1.3.00.25560_amd64.deb
+
 Manjaro
-	install version 1.0.3 from AUR repo.
-	RTC dependencies should be installed for screen sharing.
-	Wayland could be the issue so try x11 in cased of issue
+	version 1.0.3 from AUR repo.
+		RTC dependencies should be installed for screen sharing.
+		Wayland could be the issue so try x11 in cased of issue
+
+	version 1.0.5-1 from AUR repo.
+		Having Screen sharing issue.
+
+	Version 1.3.0 from Arch - Working
+		Download teams.tar.gz from https://aur.archlinux.org/packages/teams/
+		create package with command - makepkg in PKGFILE dir
+		install created package with "teams-1.3.00.30857-1-x86_64.pkg.tar.zst" with Software Center
 
 ## Setup Samba server
 sudo apt update
@@ -384,5 +393,6 @@ sudo service smbd restart
 sudo ufw allow samba
 sudo smbpasswd -a <username>
 smb://10.80.0.39/sambashare
-\\10.80.0.20\sambashare
+\\10.80.0.21\sambashare
+\\10.80.0.21\sambashare
 

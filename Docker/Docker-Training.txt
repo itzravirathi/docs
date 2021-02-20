@@ -38,6 +38,8 @@ ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>)),
 		sqlplus sys/Oradoc_db1@ORCLCDB as sysdba
 	
 		connect sys/Oradoc_db1@ORCLPDB1 as sysdba
+
+		sqlplus spring/spring@ORCLPDB1.localdomain
 ===============================	
 
 

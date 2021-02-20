@@ -1,0 +1,31 @@
+
+
+A list of third party (i.e. not part of Java SE or EE) security frameworks. This page contains a list of Java security libraries and frameworks and indicates which security features each library supports.
+
+Enterprise
+
+    Apache Shiro is a Java security framework that performs authentication, authorization, cryptography, and session management.
+    Spring Security provides security services for Java EE-based enterprise software applications. Services include authentication, authorization and protection against attacks like session fixation, clickjacking and cross site request forgery.
+    HDIV A web application security framework that provides a number of functions.
+
+Access Control (Authentication and Authorization)
+    OACC is an application security framework for Java designed for fine grained (object level) access control. OACC uses the abstraction of a resource for the application objects being secured. This key abstraction enables OACC to provide a rich API that includes grant, revoke and query capabilities for storing and managing the application's security relationships.
+    PicketLink provides authentication, single sign on, permission based access control and other security features.
+
+Encryption
+
+    Keyczar is an open source cryptographic toolkit designed to make it easier and safer for developers to use cryptography in their applications. Keyczar supports authentication and encryption with both symmetric and asymmetric keys.
+    Bouncycastle is a lightweight Java cryptography API provider.
+    Jasypt is a Java library which allows the developer to add basic encryption capabilities to his/her projects with minimum effort, and without the need of having deep knowledge on how cryptography works.
+
+XML Security
+
+    The Apache Santuario project is aimed at providing implementation of the primary security standards for XML: XML-Signature Syntax and Processing and XML Encryption Syntax and Processing.
+
+Validation
+
+    Vlad stands for "validation". This projects indeed aims at offering a simple, high-level, extensible, generic validation framework that can easily be integrated into existing applications.
+    This OWASP article and code snippet proposes a way to protect a file upload feature against submission of files that may contain malicious code.
+    The Apache Common's validator can be used to perform validation.
+
+
